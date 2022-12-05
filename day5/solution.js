@@ -29,18 +29,18 @@ const cargo = [
 
 const cargo2 = JSON.parse(JSON.stringify(cargo));
 
-const moveCrate9000 = (from, to, howMany) => {
-  cargo[to].push(...cargo[from].splice(-howMany).reverse());
+const moveCrate9000 = (from, to, quantity) => {
+  cargo[to].push(...cargo[from].splice(-quantity).reverse());
 };
 
-const moveCrate9001 = (from, to, howMany) => {
-  cargo2[to].push(...cargo2[from].splice(-howMany));
+const moveCrate9001 = (from, to, quantity) => {
+  cargo2[to].push(...cargo2[from].splice(-quantity));
 };
 
 data.forEach((instruction) => {
-  const splitInstruction = instruction.split(" ");
-  moveCrate9000(splitInstruction[3], splitInstruction[5], splitInstruction[1]);
-  moveCrate9001(splitInstruction[3], splitInstruction[5], splitInstruction[1]);
+  const [_, quantity, __, from, ___, to] = instruction.split(" ");
+  moveCrate9000(from, to, quantity);
+  moveCrate9001(from, to, quantity);
 });
 
 const solution1 = cargo.map((row) => row[row.length - 1]).join("");
