@@ -20,7 +20,7 @@ type StringLen<T extends string> = StrSplit<T>["length"];
 type FindLastUnique<S extends string, N extends number> = UnionToTuple<
   TupleToUnion<TupleOfLength<S, N>>
 >["length"] extends N
-  ? TupleOfLength<S, N>
+  ? S
   : "not-found";
 
 type FindUnique<
@@ -47,7 +47,7 @@ type FindIndex<input, length extends number, marker extends string> = input exte
   ? StringLen<`${StringOfLength<length>}${start}`>
   : never;
 
-type exampleInput = "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw";
+type exampleInput = "abcd";
 
 type Marker = FindUnique<exampleInput, 4>;
 
